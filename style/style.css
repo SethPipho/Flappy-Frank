@@ -14,9 +14,6 @@ body {
 .page-header {
     margin: auto;
     margin-top: 20px;
-
-    
-
     text-align: center;
 }
 
@@ -36,6 +33,6 @@ body {
 #title
 {
     font-family: 'Luckiest Guy';
-    font-size: 48px;
+    font-size: 24px;
 
 }
