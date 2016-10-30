@@ -1,8 +1,10 @@
 
 
 
-var imgSrc = [
- ]
+var imgSrc = [{
+  name: "franky",
+  src: "img/frank.png"
+} ]
 
 
 var imgs = {}

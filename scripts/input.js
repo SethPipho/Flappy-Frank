@@ -17,6 +17,10 @@ document.addEventListener("click", function(event) {
   Mouse.OnClick(event);
 }, false);
 
+document.getElementById("canvas").addEventListener('mousedown', function(e){ 
+  e.preventDefault(); }, 
+  false);
+
 Key = {};
 Key.state = [];
 Key.Left = 37;
