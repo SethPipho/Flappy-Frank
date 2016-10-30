@@ -1,0 +1,41 @@
+canvas {
+    display: block;
+    top: 30px;
+    margin: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+body {
+    background-color: rgb(250, 250, 250);
+    margin: auto;
+   
+}
+
+.page-header {
+    margin: auto;
+    margin-top: 20px;
+
+    
+
+    text-align: center;
+}
+
+#perf_stats {
+
+    position: fixed;
+    top:0px;
+    margin-left: 10px;
+    width: 200px;
+
+    font-family:consolas;
+    font-size: 10pt;
+    color:hsla(360, 0%, 0%, 0.5);;
+
+}
+
+#title
+{
+    font-family: 'Luckiest Guy';
+    font-size: 48px;
+
+}
