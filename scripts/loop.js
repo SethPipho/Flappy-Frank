@@ -58,7 +58,7 @@ Loop.start = function()
 {
     Loop.next_tick = Date.now();
     Loop.interpolation = 1;
-    Loop.change_state( _state );
+    Loop.change_state( start_state );
     window.requestAnimationFrame( Loop.run );
 }
 Loop.stop = function()

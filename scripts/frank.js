@@ -20,10 +20,11 @@ function frank(gravity)
 	{
 		if (this.fall)
 		{
-			this.y += this.vy;
+
 	        this.vy += this.gravity;
+					this.y += this.vy;
 		}
-		
+
 	}
 
 	this.draw = function()
@@ -31,7 +32,7 @@ function frank(gravity)
 		ctx.save()
 		ctx.translate(this.x , this.y )
 
-		this.rotation = (this.vy * this.tiltAmount) 
+		this.rotation = (this.vy * this.tiltAmount)
 		ctx.rotate(this.rotation)
 		ctx.drawImage(this.img, -1 * (imgs.franky.width/2), -1 * (imgs.franky.height/2))
 		ctx.restore()
@@ -54,11 +55,11 @@ function obstacle(gap, height, width)
 		ctx.beginPath()
 		ctx.rect(this.x, -10, width, height - (gap/2))
 		ctx.rect(this.x, height + (gap/2), width, canvas.height + 10 - height + (gap/2))
-		
+
 		ctx.fill()
 		ctx.stroke()
 		ctx.closePath()
-		
+
 	}
 }
 
@@ -93,12 +94,12 @@ function circleRectCollision(rx,ry,rw,rh, cx,cy,r)
 		closestX = rx + rw
 	}
 
-	console.log(closestX, closestY)
+	
 	return (Math.pow(closestX - cx, 2) + Math.pow(closestY - cy, 2)) < (r * r)
 }
 
 function frankObstacleCollision(f, o)
 {
-	return circleRectCollision(o.x, 0, o.width, o.height - (o.gap/2), f.x, f.y, f.img.width/2 ) ||
-	circleRectCollision(o.x,o.height + (o.gap/2), o.width, canvas.height - o.height + (o.gap/2), f.x, f.y, f.img.width/2 )
+	return circleRectCollision(o.x, 0, o.width, o.height - (o.gap/2), f.x, f.y, f.img.width/2 - 5 ) ||
+	circleRectCollision(o.x,o.height + (o.gap/2), o.width, canvas.height - o.height + (o.gap/2), f.x, f.y, f.img.width/2 - 5 )
 }
