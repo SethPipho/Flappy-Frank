@@ -6,13 +6,15 @@ var franko = new frank( GRAVITY )
 var obstacles = [];
 var alive = true
 
+var score = 0
+
 game_state = {}
 game_state.id = "game"
 game_state.start = function()
 {
-    console.log( "start" )
-    drawRect( ctx, 0, 0, canvas.width, canvas.height, 0, 0, null, "rgba(230,230,230,1)" )
-    obstacles.push( new obstacle( randRange( 200, 250 ), randRange( 200, 400 ), 100 ) )
+  
+   
+   
 }
 game_state.logic = function()
 {
@@ -26,6 +28,12 @@ game_state.logic = function()
         for ( var i = 0; i < obstacles.length; i++ )
         {
             obstacles[ i ].x -= SPEED
+
+            if (obstacles[i].x + obstacles[i].width < canvas.width/2 && obstacles[i].scored == false)
+            {
+              score++
+              obstacles[i].scored = true
+            }
             if ( frankObstacleCollision( franko, obstacles[ i ] ) )
             {
                 Loop.change_state(gameover_state)
@@ -62,9 +70,12 @@ game_state.render = function()
     }
     franko.draw()
 
-    //draw ground
-    ctx.fillStyle = "#ffdfba"
-    ctx.fillRect(0, canvas.height - 50, canvas.width, 50)
+  
+    drawGround()
+    drawScore()
+
+
+    
 }
 
 
@@ -74,7 +85,12 @@ start_state.id = "start"
 ////////
 start_state.start = function()
 {
+    franko.y = canvas.height/2
+    franko.fall = false
+    obstacles = []
+    obstacles.push( new obstacle( randRange( 200, 250 ), randRange( 200, 400 ), 100 ) )
 
+    score = 0
 }
 //////
 start_state.logic = function()
@@ -97,9 +113,26 @@ start_state.render = function()
 
   franko.draw()
 
-  //draw ground
-  ctx.fillStyle = "#ffdfba"
-  ctx.fillRect(0, canvas.height - 50, canvas.width, 50)
+
+  drawGround()
+  drawScore()
+
+  //title text
+   ctx.font = "30px 'Press Start 2P' "
+   ctx.fillStyle = " rgba(250,250,250, 1)"
+   ctx.lineWidth = 2
+
+
+   ctx.fillText("Flappy Frank",80,200)
+   ctx.strokeText("Flappy Frank",80,200)
+
+    ctx.lineWidth = 1
+
+   ctx.font = "20px 'Press Start 2P' "
+   ctx.fillText("-Press Space to Play-",50,240)
+   ctx.strokeText("-Press Space to Play-",50,240)
+
+
 }
 
 
@@ -123,6 +156,11 @@ gameover_state.logic = function()
       //reset velcity so it doesnt keep rotating
       franko.vy = 10
     }
+
+     if (  Key.state[ 13 ] == "pressed" )
+        {
+            Loop.change_state(start_state)
+        }
 }
 ////
 gameover_state.render = function()
@@ -137,13 +175,53 @@ gameover_state.render = function()
       obstacles[ i ].draw();
   }
 
-  //draw ground
-  ctx.fillStyle = "#ffdfba"
-  ctx.fillRect(0, canvas.height - 50, canvas.width, 50)
+  drawGround()
+  drawScore()
 
   ctx.fillStyle = ("rgba(250,250,250," + deathEffectOpacity.toString() + ")")
   ctx.fillRect( 0, 0, canvas.width, canvas.height );
 
 
   franko.draw()
+
+   ctx.font = "30px 'Press Start 2P' "
+   ctx.fillStyle = " rgba(250,250,250, 1)"
+   ctx.lineWidth = 2
+
+
+   ctx.fillText("Game Over",120,250)
+   ctx.strokeText("Game Over",120,250)
+
+   ctx.lineWidth = 1
+
+   ctx.font = "15px 'Press Start 2P' "
+   ctx.fillText("-Press Enter to Play Again-",45,280)
+   ctx.strokeText("-Press Enter to Play Again-",45,280)
+}
+
+
+function drawGround()
+{
+    ctx.beginPath()
+    ctx.fillStyle = "#ffdfba"
+    ctx.lineWidth = 4
+    ctx.strokeStyle = "rgba(60,60,60,1)"
+    ctx.rect(-10, canvas.height - 50, canvas.width + 20, 60)
+    ctx.fill()
+    ctx.stroke()
+    ctx.closePath()
+
+}
+
+function drawScore()
+{
+    ctx.font = "30px 'Press Start 2P' "
+    ctx.fillStyle = " rgba(250,250,250, 1)"
+    ctx.lineWidth = 2
+
+    var x = 20;
+    var y = 50;
+
+    ctx.fillText(score, x,y )
+    ctx.strokeText(score, x,y)
 }

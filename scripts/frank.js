@@ -47,11 +47,14 @@ function obstacle(gap, height, width)
 	this.gap = gap
 	this.height = height
 
+	this.scored = false;
+
 	this.draw = function()
 	{
-		ctx.strokeStyle = "rgb(50,50,50)"
+		ctx.strokeStyle = "rgb(60,60,60)"
 		ctx.fillStyle = "#baffc9"
-		ctx.lineWidth = 2
+		ctx.lineWidth = 4
+		ctx.lineJoin = "round"
 		ctx.beginPath()
 		ctx.rect(this.x, -10, width, height - (gap/2))
 		ctx.rect(this.x, height + (gap/2), width, canvas.height + 10 - height + (gap/2))
