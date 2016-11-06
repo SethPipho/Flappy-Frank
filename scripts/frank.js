@@ -98,3 +98,23 @@ function frankObstacleCollision(f, o)
 	return circleRectCollision(o.x, 0, o.width, o.height - (o.gap/2), f.x, f.y, f.img.width/2 - 5 ) ||
 	circleRectCollision(o.x,o.height + (o.gap/2), o.width, canvas.height - o.height + (o.gap/2), f.x, f.y, f.img.width/2 - 5 )
 }
+
+
+function getHighScore()
+{
+	if (localStorage.highScore)
+	{
+		return Number(localStorage.highScore)
+	}
+
+	else
+	{
+		localStorage.highScore = 0;
+		return 0
+	}
+}
+
+function setHighScore(score)
+{
+	localStorage.highScore = score;
+}

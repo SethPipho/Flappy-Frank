@@ -92,6 +92,7 @@ start_state.start = function()
     obstacles.push( new obstacle( randRange( 200, 250 ), randRange( 200, 400 ), 100 ) )
 
     score = 0
+    highScore = getHighScore()
 }
 //////
 start_state.logic = function()
@@ -142,7 +143,7 @@ gameover_state.start = function()
 
     if (score > highScore)
     {
-      highScore = score
+      setHighScore(score)
     }
 }
 ///
@@ -202,3 +203,4 @@ function drawScore()
      ctx.fillText("High Score: " + highScore, 300, 40 )
   
 }
+
