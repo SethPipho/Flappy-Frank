@@ -7,6 +7,7 @@ var obstacles = [];
 var alive = true
 
 var score = 0
+var highScore = 0
 
 game_state = {}
 game_state.id = "game"
@@ -40,9 +41,9 @@ game_state.logic = function()
             }
         }
         //collides with ground
-        if (franko.y > canvas.height - 80)
+        if (franko.y > canvas.height)
         {
-          franko.y =  canvas.height - 80
+          franko.y =  canvas.height 
           Loop.change_state(gameover_state)
         }
 
@@ -71,7 +72,7 @@ game_state.render = function()
     franko.draw()
 
   
-    drawGround()
+  
     drawScore()
 
 
@@ -95,7 +96,7 @@ start_state.start = function()
 //////
 start_state.logic = function()
 {
-  if ( Mouse.state[ 0 ] == "pressed" || Key.state[ Key.space ] == "pressed" )
+  if ( Key.state[ Key.space ] == "pressed" )
   {
     Loop.change_state(game_state)
 
@@ -114,23 +115,18 @@ start_state.render = function()
   franko.draw()
 
 
-  drawGround()
+ 
   drawScore()
 
   //title text
-   ctx.font = "30px 'Press Start 2P' "
-   ctx.fillStyle = " rgba(250,250,250, 1)"
-   ctx.lineWidth = 2
-
-
-   ctx.fillText("Flappy Frank",80,200)
-   ctx.strokeText("Flappy Frank",80,200)
-
-    ctx.lineWidth = 1
-
-   ctx.font = "20px 'Press Start 2P' "
-   ctx.fillText("-Press Space to Play-",50,240)
-   ctx.strokeText("-Press Space to Play-",50,240)
+  ctx.fillStyle = " rgba(20,20,20, 1)"
+  
+   ctx.font = "50px 'Gloria Hallelujah' "
+   ctx.fillText("Flappy Frank",100,200)
+  
+   ctx.font = "20px 'Gloria Hallelujah' "
+   ctx.fillText("-Press Space to Play-",145,240)
+   
 
 
 }
@@ -143,6 +139,11 @@ gameover_state.start = function()
 {
     deathEffectOpacity = 1;
     franko.vy = 5
+
+    if (score > highScore)
+    {
+      highScore = score
+    }
 }
 ///
 gameover_state.logic = function()
@@ -150,12 +151,7 @@ gameover_state.logic = function()
    deathEffectOpacity -= .05
     franko.update()
 
-    if (franko.y > canvas.height - 80)
-    {
-      franko.y =  canvas.height - 80
-      //reset velcity so it doesnt keep rotating
-      franko.vy = 10
-    }
+    
 
      if (  Key.state[ 13 ] == "pressed" )
         {
@@ -175,53 +171,34 @@ gameover_state.render = function()
       obstacles[ i ].draw();
   }
 
-  drawGround()
+ 
   drawScore()
 
   ctx.fillStyle = ("rgba(250,250,250," + deathEffectOpacity.toString() + ")")
   ctx.fillRect( 0, 0, canvas.width, canvas.height );
 
 
-  franko.draw()
+   franko.draw()
 
-   ctx.font = "30px 'Press Start 2P' "
-   ctx.fillStyle = " rgba(250,250,250, 1)"
-   ctx.lineWidth = 2
+   ctx.font = "50px 'Gloria Hallelujah' "
 
-
-   ctx.fillText("Game Over",120,250)
-   ctx.strokeText("Game Over",120,250)
-
-   ctx.lineWidth = 1
-
-   ctx.font = "15px 'Press Start 2P' "
-   ctx.fillText("-Press Enter to Play Again-",45,280)
-   ctx.strokeText("-Press Enter to Play Again-",45,280)
+   ctx.fillStyle = " rgba(20,20,20, 1)"
+   ctx.fillText("Game Over",140,290)
+  
+   ctx.font = "15px 'Gloria Hallelujah' "
+   ctx.fillText("-Press Enter to Play Again-",170,320)
+  
 }
 
-
-function drawGround()
-{
-    ctx.beginPath()
-    ctx.fillStyle = "#ffdfba"
-    ctx.lineWidth = 4
-    ctx.strokeStyle = "rgba(60,60,60,1)"
-    ctx.rect(-10, canvas.height - 50, canvas.width + 20, 60)
-    ctx.fill()
-    ctx.stroke()
-    ctx.closePath()
-
-}
 
 function drawScore()
 {
-    ctx.font = "30px 'Press Start 2P' "
-    ctx.fillStyle = " rgba(250,250,250, 1)"
-    ctx.lineWidth = 2
+    ctx.font = "20px 'Gloria Hallelujah' "
+    ctx.fillStyle = " rgba(20,20,20, 1)"
+  
 
-    var x = 20;
-    var y = 50;
+    ctx.fillText("Score: " + score, 20, 40 )
 
-    ctx.fillText(score, x,y )
-    ctx.strokeText(score, x,y)
+     ctx.fillText("High Score: " + highScore, 300, 40 )
+  
 }

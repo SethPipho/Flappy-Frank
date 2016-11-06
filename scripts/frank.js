@@ -51,18 +51,10 @@ function obstacle(gap, height, width)
 
 	this.draw = function()
 	{
-		ctx.strokeStyle = "rgb(60,60,60)"
-		ctx.fillStyle = "#baffc9"
-		ctx.lineWidth = 4
-		ctx.lineJoin = "round"
+		
 		ctx.beginPath()
-		ctx.rect(this.x, -10, width, height - (gap/2))
-		ctx.rect(this.x, height + (gap/2), width, canvas.height + 10 - height + (gap/2))
-
-		ctx.fill()
-		ctx.stroke()
-		ctx.closePath()
-
+		ctx.drawImage(imgs.topPipe, this.x, (this.height - this.gap/2) - imgs.topPipe.height, this.width, imgs.topPipe.height) 
+		ctx.drawImage(imgs.bottomPipe, this.x, this.height + this.gap/2, this.width, imgs.bottomPipe.height)
 	}
 }
 

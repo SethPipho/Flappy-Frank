@@ -4,6 +4,12 @@
 var imgSrc = [{
   name: "franky",
   src: "img/frank.png"
+},{
+	name:"topPipe",
+	src:"img/top-pipe.png"
+},{
+	name: "bottomPipe",
+	src: "img/bottom-pipe.png"
 } ]
 
 
