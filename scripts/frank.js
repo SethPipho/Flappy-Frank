@@ -1,4 +1,12 @@
 
+myAudio = new Audio('audio/Yee.mp3'); 
+myAudio.addEventListener('ended', function() {
+    this.currentTime = 0;
+    this.play();
+}, false);
+myAudio.play();
+
+
 function frank(gravity)
 {
 	this.x = canvas.width / 2
